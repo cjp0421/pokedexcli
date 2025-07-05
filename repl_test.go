@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/cjp0421/pokedexcli/utilities"
+)
 
 func TestCleanInput(t *testing.T) {
 	cases := []struct {
@@ -18,7 +22,7 @@ func TestCleanInput(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		actual := cleanInput(c.input)
+		actual := utilities.CleanInput(c.input)
 		if len(actual) != len(c.expected) {
 			t.Errorf("Length of actual does not match expected")
 		}
