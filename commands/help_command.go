@@ -1,8 +1,12 @@
 package commands
 
-import "fmt"
+import (
+	"fmt"
 
-func CommandHelp(config *Config) error {
+	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
+)
+
+func CommandHelp(config *cmd_utilities.Config) error {
 	fmt.Println()
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")

@@ -6,12 +6,13 @@ import (
 	"os"
 
 	"github.com/cjp0421/pokedexcli/commands"
+	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
 	"github.com/cjp0421/pokedexcli/utilities"
 )
 
 func main() {
 	reader := bufio.NewScanner(os.Stdin)
-	config := commands.Config{}
+	config := cmd_utilities.Config{}
 
 	for {
 		fmt.Print("Pokedex >")
