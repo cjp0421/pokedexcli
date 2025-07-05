@@ -4,14 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
-)
 
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
+	"github.com/cjp0421/pokedexcli/utilities"
+)
 
 func main() {
 	reader := bufio.NewScanner(os.Stdin)
@@ -22,7 +17,7 @@ func main() {
 			break
 		}
 		input := reader.Text()
-		cleanedInput := cleanInput(string(input))
+		cleanedInput := utilities.CleanInput(string(input))
 
 		commandName := cleanedInput[0]
 
@@ -38,13 +33,6 @@ func main() {
 			continue
 		}
 	}
-}
-func cleanInput(text string) []string {
-	// fmt.Println(text)
-	lowerText := strings.ToLower(text)
-	cutset := " "
-	textStrings := (strings.Split(strings.Trim(lowerText, cutset), " "))
-	return textStrings
 }
 
 func commandExit() error {
