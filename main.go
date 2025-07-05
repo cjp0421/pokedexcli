@@ -11,6 +11,7 @@ import (
 
 func main() {
 	reader := bufio.NewScanner(os.Stdin)
+	config := commands.Config{}
 
 	for {
 		fmt.Print("Pokedex >")
@@ -24,7 +25,7 @@ func main() {
 
 		command, exists := commands.GetCommands()[commandName]
 		if exists {
-			err := command.Callback()
+			err := command.Callback(&config)
 			if err != nil {
 				fmt.Println(err)
 			}
