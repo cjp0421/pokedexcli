@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/cjp0421/pokedexcli/commands"
 	"github.com/cjp0421/pokedexcli/utilities"
 )
 
@@ -21,9 +22,9 @@ func main() {
 
 		commandName := cleanedInput[0]
 
-		command, exists := getCommands()[commandName]
+		command, exists := commands.GetCommands()[commandName]
 		if exists {
-			err := command.callback()
+			err := command.Callback()
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -32,37 +33,5 @@ func main() {
 			fmt.Println("Unknown command")
 			continue
 		}
-	}
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
-	fmt.Println()
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:")
-	for _, cmd := range getCommands() {
-		fmt.Printf("%s: %s\n", cmd.name, cmd.description)
-	}
-	fmt.Println()
-	return nil
-}
-
-func getCommands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"help": {
-			name:        "help",
-			description: "Displays a help message",
-			callback:    commandHelp,
-		},
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
-		},
 	}
 }
