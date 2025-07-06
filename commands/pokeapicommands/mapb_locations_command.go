@@ -12,7 +12,7 @@ import (
 )
 
 func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache) error {
-	if config.Previous == nil {
+	if config.Previous == "" {
 		fmt.Println("You're on the first page")
 		return nil
 	}
@@ -20,14 +20,14 @@ func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache) error 
 	url := config.Previous
 	locationAreas := pokeapicommands.LocationArea{}
 
-	cachedData, ok := cache.Get(*url)
+	cachedData, ok := cache.Get(url)
 	if ok {
 		unmarshalErr := json.Unmarshal(cachedData, &locationAreas)
 		if unmarshalErr != nil {
 			return unmarshalErr
 		}
 	} else {
-		resp, respErr := http.Get(*config.Previous)
+		resp, respErr := http.Get(config.Previous)
 		if respErr != nil {
 			fmt.Println("Error making HTTP request:", respErr)
 			return respErr
