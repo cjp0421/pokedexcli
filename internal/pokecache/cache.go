@@ -1,7 +1,6 @@
 package pokecache
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -17,7 +16,6 @@ func (c *Cache) reapLoop(interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	for range ticker.C {
 		func() {
-			fmt.Println("Cleaning cache")
 			c.mu.Lock()
 			defer c.mu.Unlock()
 			for key, entry := range c.cacheEntries {

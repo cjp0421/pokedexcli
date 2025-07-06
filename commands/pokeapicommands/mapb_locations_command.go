@@ -17,29 +17,38 @@ func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache) error 
 		return nil
 	}
 
-	resp, respErr := http.Get(*config.Previous)
-	if respErr != nil {
-		fmt.Println("Error making HTTP request:", respErr)
-		return respErr
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		fmt.Printf("Unexpected status code: %d\n", resp.StatusCode)
-		return nil
-	}
-
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Printf("Error reading response body: %d", err)
-		return nil
-	}
-
+	url := config.Previous
 	locationAreas := pokeapicommands.LocationArea{}
 
-	unmarshalErr := json.Unmarshal(data, &locationAreas)
-	if unmarshalErr != nil {
-		return unmarshalErr
+	cachedData, ok := cache.Get(*url)
+	if ok {
+		unmarshalErr := json.Unmarshal(cachedData, &locationAreas)
+		if unmarshalErr != nil {
+			return unmarshalErr
+		}
+	} else {
+		resp, respErr := http.Get(*config.Previous)
+		if respErr != nil {
+			fmt.Println("Error making HTTP request:", respErr)
+			return respErr
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			fmt.Printf("Unexpected status code: %d\n", resp.StatusCode)
+			return nil
+		}
+
+		data, err := io.ReadAll(resp.Body)
+		if err != nil {
+			fmt.Printf("Error reading response body: %d", err)
+			return nil
+		}
+
+		unmarshalErr := json.Unmarshal(data, &locationAreas)
+		if unmarshalErr != nil {
+			return unmarshalErr
+		}
 	}
 
 	config.Next = locationAreas.Next
