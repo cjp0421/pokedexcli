@@ -25,7 +25,7 @@ func GetCommands() map[string]cliCommand {
 		},
 		"map": {
 			Name:        "map",
-			Description: "Show map locations",
+			Description: "Show 20 map locations",
 			Callback:    pokeapicommands.CommandMap,
 		},
 		"mapb": {
