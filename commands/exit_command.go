@@ -5,9 +5,10 @@ import (
 	"os"
 
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
+	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandExit(config *cmd_utilities.Config) error {
+func CommandExit(config *cmd_utilities.Config, cache *pokecache.Cache) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil

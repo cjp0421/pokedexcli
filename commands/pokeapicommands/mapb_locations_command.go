@@ -8,9 +8,10 @@ import (
 
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
 	pokeapicommands "github.com/cjp0421/pokedexcli/commands/pokeapicommands/api_utilities"
+	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandMapBack(config *cmd_utilities.Config) error {
+func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache) error {
 	if config.Previous == nil {
 		fmt.Println("You're on the first page")
 		return nil

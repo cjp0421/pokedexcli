@@ -3,12 +3,13 @@ package commands
 import (
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
 	"github.com/cjp0421/pokedexcli/commands/pokeapicommands"
+	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*cmd_utilities.Config) error
+	Callback    func(*cmd_utilities.Config, *pokecache.Cache) error
 }
 
 func GetCommands() map[string]cliCommand {
