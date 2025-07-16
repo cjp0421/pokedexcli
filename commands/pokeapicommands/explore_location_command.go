@@ -13,14 +13,17 @@ import (
 type LocationPokemon struct {
 	Location struct {
 		Name string `json:"name"`
-		Url  string `json:"url"`
+		URL  string `json:"url"`
 	} `json:"location"`
 	PokemonEncounters []struct {
-		Pokemon struct {
-			Name string `json:"name"`
-			URL  string `json:"url"`
-		} `json:"pokemon"`
+		Pokemon Pokemon `json:"pokemon"`
 	} `json:"pokemon_encounters"`
+}
+
+type Pokemon struct {
+	Name           string `json:"name"`
+	URL            string `json:"url"`
+	BaseExperience int    `json:"base_experience"`
 }
 
 func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string) error {
