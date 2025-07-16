@@ -1,6 +1,7 @@
 package cmd_utilities
 
 type Config struct {
-	Next     string
-	Previous string
+	Next        string
+	Previous    string
+	LocationUrl string
 }

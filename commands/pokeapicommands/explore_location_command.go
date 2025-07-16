@@ -23,16 +23,14 @@ type LocationPokemon struct {
 	} `json:"pokemon_encounters"`
 }
 
-func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, name string) error {
+func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string) error {
 
-	// if config.Next == "" {
-	// 	baseUrl := "https://pokeapi.co/api/v2/location-area/"
-	// 	offsetAndLimit := "?offset=0&limit=20"
-	// 	config.Next = baseUrl + offsetAndLimit
-	// }
+	if config.LocationUrl == "" {
+		baseUrl := "https://pokeapi.co/api/v2/location-area/"
+		config.LocationUrl = baseUrl + cliArgument
+	}
 
-	// url := config.Next
-	url := "https://pokeapi.co/api/v2/location-area/" + name
+	url := config.LocationUrl
 
 	locationPokemon := LocationPokemon{}
 
@@ -44,8 +42,7 @@ func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, name s
 		}
 	} else {
 
-		// resp, respErr := http.Get(config.Next)
-		resp, respErr := http.Get(url)
+		resp, respErr := http.Get(config.LocationUrl)
 		if respErr != nil {
 			fmt.Println("Error making HTTP request:", respErr)
 			return respErr
@@ -63,16 +60,13 @@ func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, name s
 			return nil
 		}
 
-		// cache.Add(url, data)
+		cache.Add(url, data)
 
 		unmarshalErr := json.Unmarshal(data, &locationPokemon)
 		if unmarshalErr != nil {
 			return unmarshalErr
 		}
 	}
-
-	// config.Next = locationAreas.Next
-	// config.Previous = locationAreas.Previous
 
 	for _, pokemon := range locationPokemon.PokemonEncounters {
 
