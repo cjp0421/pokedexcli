@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math/rand/v2"
 	"net/http"
 
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
@@ -57,7 +58,43 @@ func CommandCatch(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgum
 		}
 	}
 
+	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon.Name)
 	fmt.Println(pokemon.Name, pokemon.BaseExperience)
+
+	randomNumber := rand.IntN(100)
+	fmt.Println(randomNumber)
+
+	if pokemon.BaseExperience >= 300 {
+		if randomNumber >= 90 {
+			fmt.Println("Caught 'em!")
+		} else {
+			fmt.Println(pokemon.Name + " got away!")
+		}
+	} else if pokemon.BaseExperience >= 200 {
+		if randomNumber >= 80 {
+			fmt.Println("Caught 'em!")
+		} else {
+			fmt.Println(pokemon.Name + " got away!")
+		}
+	} else if pokemon.BaseExperience >= 100 {
+		if randomNumber >= 60 {
+			fmt.Println("Caught 'em!")
+		} else {
+			fmt.Println(pokemon.Name + " got away!")
+		}
+	} else if pokemon.BaseExperience >= 50 {
+		if randomNumber >= 45 {
+			fmt.Println("Caught 'em!")
+		} else {
+			fmt.Println(pokemon.Name + " got away!")
+		}
+	} else if pokemon.BaseExperience >= 0 {
+		if randomNumber >= 35 {
+			fmt.Println("Caught 'em!")
+		} else {
+			fmt.Println(pokemon.Name + " got away!")
+		}
+	}
 
 	return nil
 }
