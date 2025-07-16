@@ -11,7 +11,7 @@ import (
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandMap(config *cmd_utilities.Config, cache *pokecache.Cache) error {
+func CommandMap(config *cmd_utilities.Config, cache *pokecache.Cache, _ string) error {
 
 	if config.Next == "" {
 		baseUrl := "https://pokeapi.co/api/v2/location-area/"

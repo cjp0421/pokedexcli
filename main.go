@@ -27,9 +27,14 @@ func main() {
 
 		commandName := cleanedInput[0]
 
+		var cliArgument string
+		if len(cleanedInput) > 1 {
+			cliArgument = cleanedInput[1]
+		}
+
 		command, exists := commands.GetCommands()[commandName]
 		if exists {
-			err := command.Callback(&config, cache)
+			err := command.Callback(&config, cache, cliArgument)
 			if err != nil {
 				fmt.Println(err)
 			}

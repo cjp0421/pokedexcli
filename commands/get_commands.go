@@ -9,7 +9,7 @@ import (
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*cmd_utilities.Config, *pokecache.Cache) error
+	Callback    func(*cmd_utilities.Config, *pokecache.Cache, string) error
 }
 
 func GetCommands() map[string]cliCommand {
@@ -33,6 +33,11 @@ func GetCommands() map[string]cliCommand {
 			Name:        "mapb",
 			Description: "Show previous 20 map locations",
 			Callback:    pokeapicommands.CommandMapBack,
+		},
+		"explore": {
+			Name:        "explore",
+			Description: "Show pokemon at location",
+			Callback:    pokeapicommands.CommandExplore,
 		},
 	}
 }

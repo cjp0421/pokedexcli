@@ -11,7 +11,7 @@ import (
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache) error {
+func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string) error {
 	if config.Previous == "" {
 		fmt.Println("You're on the first page")
 		return nil
