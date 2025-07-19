@@ -9,7 +9,7 @@ import (
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*cmd_utilities.Config, *pokecache.Cache, string) error
+	Callback    func(*cmd_utilities.Config, *pokecache.Cache, string, *map[string]pokeapicommands.Pokemon) error
 }
 
 func GetCommands() map[string]cliCommand {

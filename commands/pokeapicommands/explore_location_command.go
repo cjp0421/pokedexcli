@@ -26,7 +26,7 @@ type Pokemon struct {
 	BaseExperience int    `json:"base_experience"`
 }
 
-func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string) error {
+func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string, _ *map[string]Pokemon) error {
 
 	if config.LocationUrl == "" {
 		baseUrl := "https://pokeapi.co/api/v2/location-area/"

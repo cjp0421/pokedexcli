@@ -4,10 +4,11 @@ import (
 	"fmt"
 
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
+	"github.com/cjp0421/pokedexcli/commands/pokeapicommands"
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandHelp(config *cmd_utilities.Config, cache *pokecache.Cache, _ string) error {
+func CommandHelp(config *cmd_utilities.Config, cache *pokecache.Cache, _ string, _ *map[string]pokeapicommands.Pokemon) error {
 	fmt.Println()
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
