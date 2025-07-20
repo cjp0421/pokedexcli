@@ -47,7 +47,7 @@ func CommandCatch(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgum
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon.Name)
 
 	randomNumber := rand.IntN(100)
-	// var pokemonExperience int
+
 	var catchingThreshold int
 
 	if pokemon.BaseExperience >= 300 {
