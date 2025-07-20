@@ -47,42 +47,26 @@ func CommandCatch(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgum
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon.Name)
 
 	randomNumber := rand.IntN(100)
+	// var pokemonExperience int
+	var catchingThreshold int
 
 	if pokemon.BaseExperience >= 300 {
-		if randomNumber >= 90 {
-			fmt.Printf("%s was caught!\n", pokemon.Name)
-			(*pokedex)[pokemon.Name] = pokemon
-		} else {
-			fmt.Printf("%s escaped!\n", pokemon.Name)
-		}
+		catchingThreshold = 90
 	} else if pokemon.BaseExperience >= 200 {
-		if randomNumber >= 80 {
-			fmt.Printf("%s was caught!\n", pokemon.Name)
-			(*pokedex)[pokemon.Name] = pokemon
-		} else {
-			fmt.Printf("%s escaped!\n", pokemon.Name)
-		}
+		catchingThreshold = 80
 	} else if pokemon.BaseExperience >= 100 {
-		if randomNumber >= 60 {
-			fmt.Printf("%s was caught!\n", pokemon.Name)
-			(*pokedex)[pokemon.Name] = pokemon
-		} else {
-			fmt.Printf("%s escaped!\n", pokemon.Name)
-		}
+		catchingThreshold = 60
 	} else if pokemon.BaseExperience >= 50 {
-		if randomNumber >= 45 {
-			fmt.Printf("%s was caught!\n", pokemon.Name)
-			(*pokedex)[pokemon.Name] = pokemon
-		} else {
-			fmt.Printf("%s escaped!\n", pokemon.Name)
-		}
+		catchingThreshold = 45
 	} else if pokemon.BaseExperience >= 0 {
-		if randomNumber >= 35 {
-			fmt.Printf("%s was caught!\n", pokemon.Name)
-			(*pokedex)[pokemon.Name] = pokemon
-		} else {
-			fmt.Printf("%s escaped!\n", pokemon.Name)
-		}
+		catchingThreshold = 35
+	}
+
+	if randomNumber >= catchingThreshold {
+		fmt.Printf("%s was caught!\n", pokemon.Name)
+		(*pokedex)[pokemon.Name] = pokemon
+	} else {
+		fmt.Printf("%s escaped!\n", pokemon.Name)
 	}
 
 	return nil
