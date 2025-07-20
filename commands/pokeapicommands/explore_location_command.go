@@ -24,6 +24,18 @@ type Pokemon struct {
 	Name           string `json:"name"`
 	URL            string `json:"url"`
 	BaseExperience int    `json:"base_experience"`
+	Forms          []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"forms"`
+	Moves []struct {
+		Move struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"move"`
+	} `json:"moves"`
+	Height int `json:"height"`
+	Weight int `json:"weight"`
 }
 
 func CommandExplore(config *cmd_utilities.Config, cache *pokecache.Cache, cliArgument string, _ *map[string]Pokemon) error {

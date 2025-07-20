@@ -44,5 +44,10 @@ func GetCommands() map[string]cliCommand {
 			Description: "Attempt to catch a Pokemon",
 			Callback:    pokeapicommands.CommandCatch,
 		},
+		"inspect": {
+			Name:        "inspect",
+			Description: "Attempt to catch a Pokemon",
+			Callback:    pokeapicommands.CommandInspect,
+		},
 	}
 }
