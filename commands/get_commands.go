@@ -2,14 +2,13 @@ package commands
 
 import (
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
-	"github.com/cjp0421/pokedexcli/commands/pokeapicommands"
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*cmd_utilities.Config, *pokecache.Cache, string, *map[string]pokeapicommands.Pokemon) error
+	Callback    func(*cmd_utilities.Config, *pokecache.Cache, string, *map[string]Pokemon) error
 }
 
 func GetCommands() map[string]cliCommand {
@@ -27,27 +26,27 @@ func GetCommands() map[string]cliCommand {
 		"map": {
 			Name:        "map",
 			Description: "Show 20 map locations",
-			Callback:    pokeapicommands.CommandMap,
+			Callback:    CommandMap,
 		},
 		"mapb": {
 			Name:        "mapb",
 			Description: "Show previous 20 map locations",
-			Callback:    pokeapicommands.CommandMapBack,
+			Callback:    CommandMapBack,
 		},
 		"explore": {
 			Name:        "explore",
 			Description: "Show pokemon at location",
-			Callback:    pokeapicommands.CommandExplore,
+			Callback:    CommandExplore,
 		},
 		"catch": {
 			Name:        "catch",
 			Description: "Attempt to catch a Pokemon",
-			Callback:    pokeapicommands.CommandCatch,
+			Callback:    CommandCatch,
 		},
 		"inspect": {
 			Name:        "inspect",
 			Description: "Attempt to catch a Pokemon",
-			Callback:    pokeapicommands.CommandInspect,
+			Callback:    CommandInspect,
 		},
 	}
 }

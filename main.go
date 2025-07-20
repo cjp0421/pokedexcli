@@ -8,7 +8,6 @@ import (
 
 	"github.com/cjp0421/pokedexcli/commands"
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
-	"github.com/cjp0421/pokedexcli/commands/pokeapicommands"
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 	"github.com/cjp0421/pokedexcli/utilities"
 )
@@ -17,7 +16,7 @@ func main() {
 	reader := bufio.NewScanner(os.Stdin)
 	config := cmd_utilities.Config{}
 	cache := pokecache.NewCache(5 * time.Second)
-	pokedex := map[string]pokeapicommands.Pokemon{}
+	pokedex := map[string]commands.Pokemon{}
 
 	for {
 		fmt.Print("Pokedex >")

@@ -1,4 +1,4 @@
-package pokeapicommands
+package commands
 
 import (
 	"encoding/json"

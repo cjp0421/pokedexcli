@@ -1,4 +1,4 @@
-package pokeapicommands
+package commands
 
 import (
 	"encoding/json"
@@ -6,21 +6,19 @@ import (
 	"io"
 	"net/http"
 
+	apiutilities "github.com/cjp0421/pokedexcli/commands/api_utilities"
 	"github.com/cjp0421/pokedexcli/commands/cmd_utilities"
-	pokeapicommands "github.com/cjp0421/pokedexcli/commands/pokeapicommands/api_utilities"
 	"github.com/cjp0421/pokedexcli/internal/pokecache"
 )
 
-func CommandMap(config *cmd_utilities.Config, cache *pokecache.Cache, _ string, _ *map[string]Pokemon) error {
-
-	if config.Next == "" {
-		baseUrl := "https://pokeapi.co/api/v2/location-area/"
-		offsetAndLimit := "?offset=0&limit=20"
-		config.Next = baseUrl + offsetAndLimit
+func CommandMapBack(config *cmd_utilities.Config, cache *pokecache.Cache, _ string, _ *map[string]Pokemon) error {
+	if config.Previous == "" {
+		fmt.Println("You're on the first page")
+		return nil
 	}
 
-	url := config.Next
-	locationAreas := pokeapicommands.LocationArea{}
+	url := config.Previous
+	locationAreas := apiutilities.LocationArea{}
 
 	cachedData, ok := cache.Get(url)
 	if ok {
@@ -29,8 +27,7 @@ func CommandMap(config *cmd_utilities.Config, cache *pokecache.Cache, _ string, 
 			return unmarshalErr
 		}
 	} else {
-
-		resp, respErr := http.Get(config.Next)
+		resp, respErr := http.Get(config.Previous)
 		if respErr != nil {
 			fmt.Println("Error making HTTP request:", respErr)
 			return respErr
@@ -47,8 +44,6 @@ func CommandMap(config *cmd_utilities.Config, cache *pokecache.Cache, _ string, 
 			fmt.Printf("Error reading response body: %d", err)
 			return nil
 		}
-
-		cache.Add(url, data)
 
 		unmarshalErr := json.Unmarshal(data, &locationAreas)
 		if unmarshalErr != nil {
